@@ -18,6 +18,8 @@ builder.Services.AddDbContext<DataContext>(
         .EnableDetailedErrors()
 );
 
+builder.Services.AddScoped<RepositoryContext>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

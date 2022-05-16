@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ffg.BSY.Data
+﻿namespace ffg.BSY.Data
 {
     public partial class Aufnehmer
     {
