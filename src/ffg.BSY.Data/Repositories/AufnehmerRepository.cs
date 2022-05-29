@@ -47,6 +47,18 @@ public class AufnehmerRepository : IAufnehmerRepository
         return this.context.SaveChanges() > 0;
     }
 
+    public bool Activate(int id)
+    {
+        this.context.Aufnehmer.Single(a => a.Id == id).Aktiv = true;
+        return this.context.SaveChanges() > 0;
+    }
+
+    public bool Deactivate(int id)
+    {
+        this.context.Aufnehmer.Single(a => a.Id == id).Aktiv = false;
+        return this.context.SaveChanges() > 0;
+    }
+
     #region Mapping
 
     private static AufnehmerDto Map(Aufnehmer entity) => new AufnehmerDto

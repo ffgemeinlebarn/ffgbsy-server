@@ -44,6 +44,20 @@ public class AufnehmerController : ControllerBase
         return new JsonResult(aufnehmer);
     }
 
+    [HttpPut("{id}/Activate")]
+    public IActionResult Activate(int id)
+    {
+        var success = this.repository.Aufnehmer.Activate(id);
+        return success ? new OkResult() : new BadRequestResult();
+    }
+
+    [HttpPut("{id}/Deactivate")]
+    public IActionResult Deactivate(int id)
+    {
+        var success = this.repository.Aufnehmer.Deactivate(id);
+        return success ? new OkResult() : new BadRequestResult();
+    }
+
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
