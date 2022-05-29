@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ffg.BSY.Data
+namespace ffg.BSY.Data;
+
+public class Produktkategorie
 {
-    public partial class Produktkategorie
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Color { get; set; } = null!;
-        public int ProduktbereicheId { get; set; }
-        public int? DruckerIdLevel1 { get; set; }
-        public int? Sortierindex { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [StringLength(50)]
+    public string Name { get; set; } = null!;
+
+    [StringLength(9)]
+    public string Color { get; set; } = "#aaaaaa";
+
+    [ForeignKey(nameof(Produktbereich))]
+    public int ProduktbereichId { get; set; }
+
+    public int Sortierindex { get; set; } = 100;
+
+    [ForeignKey(nameof(Drucker))]
+    public int? DruckerIdLevel1 { get; set; }
 }

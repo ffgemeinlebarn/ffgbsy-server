@@ -1,17 +1,22 @@
-﻿namespace ffg.BSY.Data;
+﻿using System.ComponentModel.DataAnnotations;
 
-public partial class Aufnehmer
+namespace ffg.BSY.Data;
+
+public class Aufnehmer : AuditBase
 {
-    public Aufnehmer()
-    {
-        Bestellungens = new HashSet<Bestellung>();
-    }
-
+    [Key]
     public int Id { get; set; }
-    public string? Vorname { get; set; }
-    public string? Nachname { get; set; }
-    public bool Aktiv { get; set; }
-    public int ZoomLevel { get; set; }
 
-    public virtual ICollection<Bestellung> Bestellungens { get; set; }
+    [StringLength(50)]
+    public string? Vorname { get; set; }
+
+    [StringLength(50)]
+    public string? Nachname { get; set; }
+
+    public bool Aktiv { get; set; } = true;
+
+    [Range(1, 3)]
+    public int ZoomLevel { get; set; } = 1;
+
+    public ICollection<Bestellung> Bestellungen { get; set; } = new HashSet<Bestellung>();
 }

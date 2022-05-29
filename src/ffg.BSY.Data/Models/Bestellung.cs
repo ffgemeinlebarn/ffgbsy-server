@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ffg.BSY.Data;
 
-public partial class Bestellung
+public class Bestellung : AuditBase
 {
+    [Key]
     public int Id { get; set; }
-    public int TischeId { get; set; }
+
     public DateTime TimestampBegonnen { get; set; }
     public DateTime TimestampBeendet { get; set; }
     public DateTime? TimestampGedruckt { get; set; }
-    public int AufnehmerId { get; set; }
 
     [MaxLength(15)]
     public string? GeraetIpAddress { get; set; }
@@ -17,6 +18,15 @@ public partial class Bestellung
     [MaxLength(100)]
     public string? GeraetName { get; set; }
 
-    public virtual Aufnehmer Aufnehmer { get; set; } = null!;
-    public virtual Tisch Tische { get; set; } = null!;
+    #region Relations
+
+    [ForeignKey(nameof(Aufnehmer))]
+    public int AufnehmerId { get; set; }
+    public Aufnehmer Aufnehmer { get; set; } = null!;
+
+    [ForeignKey(nameof(Tisch))]
+    public int TischId { get; set; }
+    public Tisch Tisch { get; set; } = null!;
+
+    #endregion
 }

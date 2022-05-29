@@ -14,19 +14,19 @@ public class AufnehmerRepository : IAufnehmerRepository
 
     public AufnehmerDto? Read(int id)
     {
-        Aufnehmer? entity = this.context.Aufnehmers.SingleOrDefault(a => a.Id == id);
+        Aufnehmer? entity = this.context.Aufnehmer.SingleOrDefault(a => a.Id == id);
         return entity is null ? null : Map(entity);
     }
 
     public IQueryable<AufnehmerDto> Read()
     {
-        return this.context.Aufnehmers.Select(entity => Map(entity)).AsQueryable();
+        return this.context.Aufnehmer.Select(entity => Map(entity)).AsQueryable();
     }
 
     public AufnehmerDto Create(AufnehmerDto entityDto)
     {
         Aufnehmer entity = Map(entityDto);
-        this.context.Aufnehmers.Add(entity);
+        this.context.Aufnehmer.Add(entity);
         this.context.SaveChanges();
 
         return Map(entity);
@@ -35,7 +35,7 @@ public class AufnehmerRepository : IAufnehmerRepository
     public AufnehmerDto Update(AufnehmerDto entityDto)
     {
         Aufnehmer entity = Map(entityDto);
-        this.context.Aufnehmers.Update(entity);
+        this.context.Aufnehmer.Update(entity);
         this.context.SaveChanges();
 
         return Map(entity);
@@ -43,7 +43,7 @@ public class AufnehmerRepository : IAufnehmerRepository
 
     public bool Delete(int id)
     {
-        this.context.Aufnehmers.Remove(new Aufnehmer { Id = id });
+        this.context.Aufnehmer.Remove(new Aufnehmer { Id = id });
         return this.context.SaveChanges() > 0;
     }
 

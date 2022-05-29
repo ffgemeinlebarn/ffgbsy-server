@@ -6,21 +6,17 @@ namespace ffg.BSY.Data;
 public class RepositoryContext
 {
     private readonly DataContext context;
-    private IAufnehmerRepository aufnehmer;
+    private IAufnehmerRepository aufnehmer = null!;
 
     public IAufnehmerRepository Aufnehmer
     {
-        get
-        {
-            if (this.aufnehmer == null)
-            {
-                this.aufnehmer = new AufnehmerRepository(this.context);
-            }
-            return this.aufnehmer;
-        }
+        get => this.aufnehmer is null ? new AufnehmerRepository(this.context) : this.aufnehmer;
     }
 
-    public RepositoryContext(DataContext context) => this.context = context;
+    public RepositoryContext(DataContext context)
+    {
+        this.context = context;
+    }
 
     public void Save()
     {

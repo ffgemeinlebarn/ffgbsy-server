@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ffg.BSY.Data
+namespace ffg.BSY.Data;
+
+public class ProduktkategorieEigenschaft
 {
-    public partial class ProduktkategorieEigenschaft
-    {
-        public int ProduktkategorienId { get; set; }
-        public int EigenschaftenId { get; set; }
-        public bool InProduktEnthalten { get; set; }
-    }
+    [ForeignKey(nameof(Produktkategorie))]
+    public int ProduktkategorieId { get; set; }
+
+    [ForeignKey(nameof(Eigenschaft))]
+    public int EigenschaftId { get; set; }
+
+    public bool InProduktEnthalten { get; set; } = false;
 }

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ffg.BSY.Data
+namespace ffg.BSY.Data;
+
+public class BestellpositionEigenschaft : AuditBase
 {
-    public partial class BestellpositionEigenschaft
-    {
-        public int BestellpositionenId { get; set; }
-        public int EigenschaftenId { get; set; }
-        public bool? InProduktEnthalten { get; set; }
-        public bool? Aktiv { get; set; }
-    }
+    public bool InProduktEnthalten { get; set; } = true;
+    public bool Aktiv { get; set; } = true;
+
+    [ForeignKey(nameof(Bestellposition))]
+    public int BestellpositionId { get; set; }
+
+    [ForeignKey(nameof(Eigenschaft))]
+    public int EigenschaftId { get; set; }
 }

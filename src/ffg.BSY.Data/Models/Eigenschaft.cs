@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ffg.BSY.Data
+namespace ffg.BSY.Data;
+
+public class Eigenschaft
 {
-    public partial class Eigenschaft
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public decimal Preis { get; set; }
-        public int Sortierindex { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [StringLength(100)]
+    public string Name { get; set; } = null!;
+
+    [Range(0, 50)]
+    public decimal Preis { get; set; }
+
+    public int Sortierindex { get; set; } = 100;
 }

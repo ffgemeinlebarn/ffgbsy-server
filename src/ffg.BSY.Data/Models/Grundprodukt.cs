@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ffg.BSY.Data
+namespace ffg.BSY.Data;
+
+public class Grundprodukt
 {
-    public partial class Grundprodukt
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public int? Bestand { get; set; }
-        public string? Einheit { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [StringLength(50)]
+    public string Name { get; set; } = null!;
+
+    public int? Bestand { get; set; }
+
+    public string? Einheit { get; set; }
 }
