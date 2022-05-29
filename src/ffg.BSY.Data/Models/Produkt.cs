@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ffg.BSY.Data
 {
-    public partial class Produkte
+    public partial class Produkt
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

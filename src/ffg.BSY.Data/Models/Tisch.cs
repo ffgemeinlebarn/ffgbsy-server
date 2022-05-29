@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ffg.BSY.Data
 {
-    public partial class Tische
+    public partial class Tisch
     {
-        public Tische()
+        public Tisch()
         {
-            Bestellungens = new HashSet<Bestellungen>();
+            Bestellungens = new HashSet<Bestellung>();
         }
 
         public int Id { get; set; }
@@ -16,6 +16,6 @@ namespace ffg.BSY.Data
         public int TischkategorienId { get; set; }
         public int? Sortierindex { get; set; }
 
-        public virtual ICollection<Bestellungen> Bestellungens { get; set; }
+        public virtual ICollection<Bestellung> Bestellungens { get; set; }
     }
 }

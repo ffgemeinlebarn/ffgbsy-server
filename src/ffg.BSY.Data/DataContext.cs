@@ -14,24 +14,22 @@ public partial class DataContext : DbContext
     }
 
     public virtual DbSet<Aufnehmer> Aufnehmers { get; set; } = null!;
-    public virtual DbSet<AufnehmerSession> AufnehmerSessions { get; set; } = null!;
-    public virtual DbSet<Bestellpositionen> Bestellpositionens { get; set; } = null!;
-    public virtual DbSet<BestellpositionenEigenschaften> BestellpositionenEigenschaftens { get; set; } = null!;
-    public virtual DbSet<BestellpositionenStorno> BestellpositionenStornos { get; set; } = null!;
-    public virtual DbSet<Bestellungen> Bestellungens { get; set; } = null!;
-    public virtual DbSet<BonsDruck> BonsDrucks { get; set; } = null!;
-    public virtual DbSet<Drucker> Druckers { get; set; } = null!;
-    public virtual DbSet<Eigenschaften> Eigenschaftens { get; set; } = null!;
-    public virtual DbSet<Geraete> Geraetes { get; set; } = null!;
-    public virtual DbSet<Grundprodukte> Grundproduktes { get; set; } = null!;
-    public virtual DbSet<Produktbereiche> Produktbereiches { get; set; } = null!;
-    public virtual DbSet<Produkte> Produktes { get; set; } = null!;
-    public virtual DbSet<ProdukteEigenschaften> ProdukteEigenschaftens { get; set; } = null!;
-    public virtual DbSet<Produkteinteilungen> Produkteinteilungens { get; set; } = null!;
-    public virtual DbSet<Produktkategorien> Produktkategoriens { get; set; } = null!;
-    public virtual DbSet<ProduktkategorienEigenschaften> ProduktkategorienEigenschaftens { get; set; } = null!;
-    public virtual DbSet<Tische> Tisches { get; set; } = null!;
-    public virtual DbSet<Tischkategorien> Tischkategoriens { get; set; } = null!;
+    public virtual DbSet<Bestellposition> Bestellpositionen { get; set; } = null!;
+    public virtual DbSet<BestellpositionEigenschaft> BestellpositionenEigenschaften { get; set; } = null!;
+    public virtual DbSet<BestellpositionStorno> BestellpositionStornos { get; set; } = null!;
+    public virtual DbSet<Bestellung> Bestellungens { get; set; } = null!;
+    public virtual DbSet<BonAusdruck> BonAusdrucke { get; set; } = null!;
+    public virtual DbSet<Drucker> Drucker { get; set; } = null!;
+    public virtual DbSet<Eigenschaft> Eigenschaften { get; set; } = null!;
+    public virtual DbSet<Grundprodukt> Grundprodukte { get; set; } = null!;
+    public virtual DbSet<Produktbereich> Produktbereiche { get; set; } = null!;
+    public virtual DbSet<Produkt> Produkte { get; set; } = null!;
+    public virtual DbSet<ProduktEigenschaft> ProduktEigenschaften { get; set; } = null!;
+    public virtual DbSet<Produkteinteilung> Produkteinteilungen { get; set; } = null!;
+    public virtual DbSet<Produktkategorie> Produktkategorien { get; set; } = null!;
+    public virtual DbSet<ProduktkategorieEigenschaft> ProduktkategorieEigenschaften { get; set; } = null!;
+    public virtual DbSet<Tisch> Tische { get; set; } = null!;
+    public virtual DbSet<Tischkategorie> Tischkategorien { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -65,36 +63,7 @@ public partial class DataContext : DbContext
                 .HasDefaultValueSql("'1'");
         });
 
-        modelBuilder.Entity<AufnehmerSession>(entity =>
-        {
-            entity.ToTable("aufnehmer_sessions");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-
-            entity.Property(e => e.AufnehmerId)
-                .HasColumnType("int(11)")
-                .HasColumnName("aufnehmer_id");
-
-            entity.Property(e => e.Ende)
-                .HasColumnType("datetime")
-                .HasColumnName("ende");
-
-            entity.Property(e => e.GeraeteId)
-                .HasColumnType("int(11)")
-                .HasColumnName("geraete_id");
-
-            entity.Property(e => e.Hash)
-                .HasMaxLength(400)
-                .HasColumnName("hash");
-
-            entity.Property(e => e.Start)
-                .HasColumnType("datetime")
-                .HasColumnName("start");
-        });
-
-        modelBuilder.Entity<Bestellpositionen>(entity =>
+        modelBuilder.Entity<Bestellposition>(entity =>
         {
             entity.ToTable("bestellpositionen");
 
@@ -126,7 +95,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("produkte_id");
         });
 
-        modelBuilder.Entity<BestellpositionenEigenschaften>(entity =>
+        modelBuilder.Entity<BestellpositionEigenschaft>(entity =>
         {
             entity.HasKey(e => new { e.BestellpositionenId, e.EigenschaftenId })
                 .HasName("PRIMARY")
@@ -150,7 +119,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.InProduktEnthalten).HasColumnName("in_produkt_enthalten");
         });
 
-        modelBuilder.Entity<BestellpositionenStorno>(entity =>
+        modelBuilder.Entity<BestellpositionStorno>(entity =>
         {
             entity.ToTable("bestellpositionen_storno");
 
@@ -176,7 +145,7 @@ public partial class DataContext : DbContext
                 .HasDefaultValueSql("current_timestamp()");
         });
 
-        modelBuilder.Entity<Bestellungen>(entity =>
+        modelBuilder.Entity<Bestellung>(entity =>
         {
             entity.ToTable("bestellungen");
 
@@ -184,8 +153,6 @@ public partial class DataContext : DbContext
                 .UseCollation("utf8_general_ci");
 
             entity.HasIndex(e => e.AufnehmerId, "fk_aufnehmer_id");
-
-            entity.HasIndex(e => e.GeraeteId, "fk_geraete_id");
 
             entity.HasIndex(e => e.TischeId, "fk_tische_id");
 
@@ -196,10 +163,6 @@ public partial class DataContext : DbContext
             entity.Property(e => e.AufnehmerId)
                 .HasColumnType("int(11)")
                 .HasColumnName("aufnehmer_id");
-
-            entity.Property(e => e.GeraeteId)
-                .HasColumnType("int(11)")
-                .HasColumnName("geraete_id");
 
             entity.Property(e => e.TimestampBeendet)
                 .HasColumnType("datetime")
@@ -224,12 +187,6 @@ public partial class DataContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_aufnehmer_id");
 
-            entity.HasOne(d => d.Geraete)
-                .WithMany(p => p.Bestellungens)
-                .HasForeignKey(d => d.GeraeteId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_geraete_id");
-
             entity.HasOne(d => d.Tische)
                 .WithMany(p => p.Bestellungens)
                 .HasForeignKey(d => d.TischeId)
@@ -237,7 +194,7 @@ public partial class DataContext : DbContext
                 .HasConstraintName("fk_tische_id");
         });
 
-        modelBuilder.Entity<BonsDruck>(entity =>
+        modelBuilder.Entity<BonAusdruck>(entity =>
         {
             entity.ToTable("bons_druck");
 
@@ -306,7 +263,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("port");
         });
 
-        modelBuilder.Entity<Eigenschaften>(entity =>
+        modelBuilder.Entity<Eigenschaft>(entity =>
         {
             entity.ToTable("eigenschaften");
 
@@ -330,35 +287,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("sortierindex");
         });
 
-        modelBuilder.Entity<Geraete>(entity =>
-        {
-            entity.ToTable("geraete");
-
-            entity.HasCharSet("utf8")
-                .UseCollation("utf8_general_ci");
-
-            entity.Property(e => e.Id)
-                .HasColumnType("int(11)")
-                .HasColumnName("id");
-
-            entity.Property(e => e.Hersteller)
-                .HasMaxLength(50)
-                .HasColumnName("hersteller");
-
-            entity.Property(e => e.Ip)
-                .HasMaxLength(50)
-                .HasColumnName("ip");
-
-            entity.Property(e => e.Mac)
-                .HasMaxLength(100)
-                .HasColumnName("mac");
-
-            entity.Property(e => e.Type)
-                .HasMaxLength(80)
-                .HasColumnName("type");
-        });
-
-        modelBuilder.Entity<Grundprodukte>(entity =>
+        modelBuilder.Entity<Grundprodukt>(entity =>
         {
             entity.ToTable("grundprodukte");
 
@@ -379,7 +308,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Produktbereiche>(entity =>
+        modelBuilder.Entity<Produktbereich>(entity =>
         {
             entity.ToTable("produktbereiche");
 
@@ -405,7 +334,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("name");
         });
 
-        modelBuilder.Entity<Produkte>(entity =>
+        modelBuilder.Entity<Produkt>(entity =>
         {
             entity.ToTable("produkte");
 
@@ -470,7 +399,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("sortierindex");
         });
 
-        modelBuilder.Entity<ProdukteEigenschaften>(entity =>
+        modelBuilder.Entity<ProduktEigenschaft>(entity =>
         {
             entity.HasKey(e => new { e.ProdukteId, e.EigenschaftenId })
                 .HasName("PRIMARY")
@@ -492,7 +421,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.InProduktEnthalten).HasColumnName("in_produkt_enthalten");
         });
 
-        modelBuilder.Entity<Produkteinteilungen>(entity =>
+        modelBuilder.Entity<Produkteinteilung>(entity =>
         {
             entity.ToTable("produkteinteilungen");
 
@@ -512,7 +441,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("sortierindex");
         });
 
-        modelBuilder.Entity<Produktkategorien>(entity =>
+        modelBuilder.Entity<Produktkategorie>(entity =>
         {
             entity.ToTable("produktkategorien");
 
@@ -548,7 +477,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("sortierindex");
         });
 
-        modelBuilder.Entity<ProduktkategorienEigenschaften>(entity =>
+        modelBuilder.Entity<ProduktkategorieEigenschaft>(entity =>
         {
             entity.HasKey(e => new { e.ProduktkategorienId, e.EigenschaftenId })
                 .HasName("PRIMARY")
@@ -571,7 +500,7 @@ public partial class DataContext : DbContext
             entity.Property(e => e.InProduktEnthalten).HasColumnName("in_produkt_enthalten");
         });
 
-        modelBuilder.Entity<Tische>(entity =>
+        modelBuilder.Entity<Tisch>(entity =>
         {
             entity.ToTable("tische");
 
@@ -599,7 +528,7 @@ public partial class DataContext : DbContext
                 .HasColumnName("tischkategorien_id");
         });
 
-        modelBuilder.Entity<Tischkategorien>(entity =>
+        modelBuilder.Entity<Tischkategorie>(entity =>
         {
             entity.ToTable("tischkategorien");
 

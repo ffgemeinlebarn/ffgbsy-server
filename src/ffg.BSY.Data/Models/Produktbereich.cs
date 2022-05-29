@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ffg.BSY.Data
 {
-    public partial class Grundprodukte
+    public partial class Produktbereich
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public int? Bestand { get; set; }
-        public string? Einheit { get; set; }
+        public string? Farbe { get; set; }
+        public int? DruckerIdLevel0 { get; set; }
     }
 }

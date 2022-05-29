@@ -4,7 +4,7 @@
     {
         public Aufnehmer()
         {
-            Bestellungens = new HashSet<Bestellungen>();
+            Bestellungens = new HashSet<Bestellung>();
         }
 
         public int Id { get; set; }
@@ -13,6 +13,6 @@
         public bool Aktiv { get; set; }
         public int ZoomLevel { get; set; }
 
-        public virtual ICollection<Bestellungen> Bestellungens { get; set; }
+        public virtual ICollection<Bestellung> Bestellungens { get; set; }
     }
 }

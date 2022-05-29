@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ffg.BSY.Data
 {
-    public partial class Bestellpositionen
+    public partial class Bestellposition
     {
         public int Id { get; set; }
         public int Anzahl { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ffg.BSY.Data
 {
-    public partial class BonsDruck
+    public partial class BonAusdruck
     {
         public int Id { get; set; }
         public int BestellungenId { get; set; }
