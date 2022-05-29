@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class Eigenschaft
+public class Eigenschaft : AuditBase
 {
     [Key]
     public int Id { get; set; }

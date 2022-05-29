@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class Drucker
+public class Drucker : AuditBase
 {
     [Key]
     public int Id { get; set; }

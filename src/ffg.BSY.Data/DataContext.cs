@@ -24,7 +24,7 @@ public class DataContext : DbContext
     public DbSet<Grundprodukt> Grundprodukte { get; set; } = null!;
     public DbSet<Produktbereich> Produktbereiche { get; set; } = null!;
     public DbSet<Produkt> Produkte { get; set; } = null!;
-    public DbSet<Produkteigenschaft> Produkteigenschaften { get; set; } = null!;
+    public DbSet<ProduktEigenschaft> Produkteigenschaften { get; set; } = null!;
     public DbSet<Produkteinteilung> Produkteinteilungen { get; set; } = null!;
     public DbSet<Produktkategorie> Produktkategorien { get; set; } = null!;
     public DbSet<ProduktkategorieEigenschaft> ProduktkategorieEigenschaften { get; set; } = null!;
@@ -33,7 +33,29 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("utf8mb4_general_ci")
+        modelBuilder
+            .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<BestellpositionEigenschaft>(entity =>
+        {
+            entity.HasKey(e => new { e.BestellpositionId, e.EigenschaftId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+        });
+
+        modelBuilder.Entity<ProduktEigenschaft>(entity =>
+        {
+            entity.HasKey(e => new { e.ProduktId, e.EigenschaftId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+        });
+
+        modelBuilder.Entity<ProduktkategorieEigenschaft>(entity =>
+        {
+            entity.HasKey(e => new { e.ProduktkategorieId, e.EigenschaftId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+        });
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class Produkteinteilung
+public class Produkteinteilung : AuditBase
 {
     [Key]
     public int Id { get; set; }

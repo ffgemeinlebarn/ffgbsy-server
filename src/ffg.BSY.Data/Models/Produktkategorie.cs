@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ffg.BSY.Data;
 
-public class Produktkategorie
+public class Produktkategorie : AuditBase
 {
     [Key]
     public int Id { get; set; }

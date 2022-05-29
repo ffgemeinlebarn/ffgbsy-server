@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class ProduktkategorieEigenschaft
+public class ProduktkategorieEigenschaft : AuditBase
 {
     [ForeignKey(nameof(Produktkategorie))]
     public int ProduktkategorieId { get; set; }

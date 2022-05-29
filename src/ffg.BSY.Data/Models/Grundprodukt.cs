@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class Grundprodukt
+public class Grundprodukt : AuditBase
 {
     [Key]
     public int Id { get; set; }

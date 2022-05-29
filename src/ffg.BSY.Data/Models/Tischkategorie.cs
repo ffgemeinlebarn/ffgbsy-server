@@ -2,7 +2,7 @@
 
 namespace ffg.BSY.Data;
 
-public class Tischkategorie
+public class Tischkategorie : AuditBase
 {
     [Key]
     public int Id { get; set; }
