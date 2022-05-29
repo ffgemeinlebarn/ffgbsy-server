@@ -5,3 +5,7 @@
 ```ps
 dotnet ef database update --project .\src\ffg.BSY.Data\ffg.BSY.Data.csproj --startup-project .\src\ffg.BSY.Api\ffg.BSY.Api.csproj
 ```
+
+```ps
+dotnet ef migrations add "Init" --project .\src\ffg.BSY.Data\ffg.BSY.Data.csproj --startup-project .\src\ffg.BSY.Api\ffg.BSY.Api.csproj
+```
