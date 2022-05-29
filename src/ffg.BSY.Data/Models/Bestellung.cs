@@ -14,6 +14,9 @@ public partial class Bestellung
     [MaxLength(15)]
     public string? GeraetIpAddress { get; set; }
 
+    [MaxLength(100)]
+    public string? GeraetName { get; set; }
+
     public virtual Aufnehmer Aufnehmer { get; set; } = null!;
     public virtual Tisch Tische { get; set; } = null!;
 }
