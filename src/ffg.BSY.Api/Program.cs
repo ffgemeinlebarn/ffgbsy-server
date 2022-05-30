@@ -1,8 +1,24 @@
+using ffg.BSY.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<DataContext>(
+    options => options
+        .UseMySql(
+            builder.Configuration.GetConnectionString("ffgbsy"),
+            new MySqlServerVersion(new Version(8, 0, 27))
+        )
+        .LogTo(Console.WriteLine, LogLevel.Information)
+        .EnableSensitiveDataLogging()
+        .EnableDetailedErrors()
+);
+
+builder.Services.AddScoped<RepositoryContext>();
 
 var app = builder.Build();
 
