@@ -7,11 +7,13 @@ public class RepositoryContext
 {
     private readonly DataContext context;
     private IAufnehmerRepository aufnehmer = null!;
+    private IDruckerRepository drucker = null!;
 
     public IAufnehmerRepository Aufnehmer
-    {
-        get => this.aufnehmer is null ? new AufnehmerRepository(this.context) : this.aufnehmer;
-    }
+    { get => this.aufnehmer is null ? new AufnehmerRepository(this.context) : this.aufnehmer; }
+
+    public IDruckerRepository Drucker
+    { get => this.drucker is null ? new DruckerRepository(this.context) : this.drucker; }
 
     public RepositoryContext(DataContext context)
     {
