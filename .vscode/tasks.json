@@ -36,6 +36,62 @@
                 "${workspaceFolder}/src/ffg.BSY.Api/ffg.BSY.Api.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "EF Update Database",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "--project",
+                "${workspaceFolder}/src/ffg.BSY.Data/ffg.BSY.Data.csproj ",
+                "--startup-project",
+                "${workspaceFolder}/src/ffg.BSY.Api/ffg.BSY.Api.csproj"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "EF New Migration",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "${input:ef-migration-name}",
+                "--project",
+                "${workspaceFolder}/src/ffg.BSY.Data/ffg.BSY.Data.csproj ",
+                "--startup-project",
+                "${workspaceFolder}/src/ffg.BSY.Api/ffg.BSY.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "ef-migration-name",
+            "description": "Name der Migration",
+            "type": "promptString"
         }
     ]
 }
