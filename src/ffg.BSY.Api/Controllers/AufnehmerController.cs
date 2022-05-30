@@ -8,10 +8,10 @@ namespace ffg.BSY.Api.Controllers;
 [Route("[controller]")]
 public class AufnehmerController : ControllerBase
 {
-    private readonly ILogger<StatusController> logger;
+    private readonly ILogger<AufnehmerController> logger;
     private readonly RepositoryContext repository;
 
-    public AufnehmerController(ILogger<StatusController> logger, RepositoryContext repository)
+    public AufnehmerController(ILogger<AufnehmerController> logger, RepositoryContext repository)
     {
         this.logger = logger;
         this.repository = repository;
@@ -33,15 +33,13 @@ public class AufnehmerController : ControllerBase
     [HttpPost]
     public IActionResult Create([FromBody] AufnehmerDto entity)
     {
-        var aufnehmer = this.repository.Aufnehmer.Create(entity);
-        return new JsonResult(aufnehmer);
+        return new JsonResult(this.repository.Aufnehmer.Create(entity));
     }
 
     [HttpPut("{id}")]
     public IActionResult Put([FromBody] AufnehmerDto entity)
     {
-        var aufnehmer = this.repository.Aufnehmer.Update(entity);
-        return new JsonResult(aufnehmer);
+        return new JsonResult(this.repository.Aufnehmer.Update(entity));
     }
 
     [HttpPut("{id}/Activate")]

@@ -8,10 +8,10 @@ namespace ffg.BSY.Api.Controllers;
 [Route("[controller]")]
 public class DruckerController : ControllerBase
 {
-    private readonly ILogger<StatusController> logger;
+    private readonly ILogger<DruckerController> logger;
     private readonly RepositoryContext repository;
 
-    public DruckerController(ILogger<StatusController> logger, RepositoryContext repository)
+    public DruckerController(ILogger<DruckerController> logger, RepositoryContext repository)
     {
         this.logger = logger;
         this.repository = repository;
@@ -26,22 +26,20 @@ public class DruckerController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        var Drucker = this.repository.Drucker.Read(id);
-        return Drucker is null ? new NotFoundResult() : new JsonResult(Drucker);
+        var drucker = this.repository.Drucker.Read(id);
+        return drucker is null ? new NotFoundResult() : new JsonResult(drucker);
     }
 
     [HttpPost]
     public IActionResult Create([FromBody] DruckerDto entity)
     {
-        var Drucker = this.repository.Drucker.Create(entity);
-        return new JsonResult(Drucker);
+        return new JsonResult(this.repository.Drucker.Create(entity));
     }
 
     [HttpPut("{id}")]
     public IActionResult Put([FromBody] DruckerDto entity)
     {
-        var Drucker = this.repository.Drucker.Update(entity);
-        return new JsonResult(Drucker);
+        return new JsonResult(this.repository.Drucker.Update(entity));
     }
 
     [HttpDelete("{id}")]

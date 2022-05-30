@@ -9,6 +9,9 @@ public class DruckerRepository : IDruckerRepository
 
     public DruckerRepository(DataContext context)
     {
+        if (context is null)
+            throw new ArgumentNullException(nameof(context));
+
         this.context = context;
     }
 
