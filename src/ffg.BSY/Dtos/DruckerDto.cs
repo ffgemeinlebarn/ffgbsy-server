@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using ffg.BSY.Attributes;
 
 namespace ffg.BSY.Dtos;
 
@@ -8,8 +8,8 @@ public class DruckerDto
     public string Name { get; set; } = String.Empty;
     public string? Standort { get; set; }
 
-    [RegularExpression("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")]
+    [IpAddressFormat]
     public string Ip { get; set; } = String.Empty;
 
-    public int Port { get; set; }
+    public int Port { get; set; } = default;
 }

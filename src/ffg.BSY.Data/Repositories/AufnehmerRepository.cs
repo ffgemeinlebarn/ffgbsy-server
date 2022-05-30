@@ -1,4 +1,4 @@
-using ffg.BSY.Data.Contracts;
+using ffg.BSY.Contracts;
 using ffg.BSY.Dtos;
 
 namespace ffg.BSY.Data.Repositories;

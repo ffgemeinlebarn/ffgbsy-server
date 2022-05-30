@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ffg.BSY.Attributes;
 
 namespace ffg.BSY.Data;
 
@@ -14,9 +15,9 @@ public class Drucker : AuditBase
     public string? Standort { get; set; }
 
     [StringLength(100)]
-    [RegularExpression("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$")]
+    [IpAddressFormat]
     public string Ip { get; set; } = null!;
 
-    [Range(0, 65535)]
+    [Range(0, 65535, ErrorMessage = "Der Port zwischen 0 und 65535 liegen!")]
     public int Port { get; set; } = 9100;
 }
