@@ -1,6 +1,6 @@
 using ffg.BSY.Dtos;
 
-namespace ffg.BSY.Data.Contracts;
+namespace ffg.BSY.Contracts;
 
 public interface IAufnehmerRepository
 {
@@ -8,7 +8,8 @@ public interface IAufnehmerRepository
     IQueryable<AufnehmerDto> Read();
     AufnehmerDto Create(AufnehmerDto entity);
     AufnehmerDto Update(AufnehmerDto entity);
+    bool Delete(int id);
+
     bool Activate(int id);
     bool Deactivate(int id);
-    bool Delete(int id);
 }

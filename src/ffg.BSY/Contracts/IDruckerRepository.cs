@@ -1,6 +1,6 @@
 using ffg.BSY.Dtos;
 
-namespace ffg.BSY.Data.Contracts;
+namespace ffg.BSY.Contracts;
 
 public interface IDruckerRepository
 {
